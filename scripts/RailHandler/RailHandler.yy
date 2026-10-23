@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"Script1",
+  "%Name":"RailHandler",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Script1",
+  "name":"RailHandler",
   "parent":{
     "name":"PAC_IV",
     "path":"PAC_IV.yyp",
