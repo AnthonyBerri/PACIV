@@ -1,0 +1,1 @@
+DrawInventory(self)
