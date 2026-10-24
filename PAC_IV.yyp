@@ -39,6 +39,7 @@
     {"id":{"name":"S_TrainStation","path":"sprites/S_TrainStation/S_TrainStation.yy",},},
     {"id":{"name":"S_TurnRail","path":"sprites/S_TurnRail/S_TurnRail.yy",},},
     {"id":{"name":"Sprite1","path":"sprites/Sprite1/Sprite1.yy",},},
+    {"id":{"name":"TrainHandler","path":"sprites/TrainHandler/TrainHandler.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

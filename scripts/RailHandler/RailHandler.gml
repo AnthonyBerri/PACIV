@@ -20,9 +20,11 @@ function PlaceRail(rx, ry, rrot, rt) {
 }
 
 function PlaceTrain(rx, ry, rrot, rt) {
-	
+	if(rrot == 1){
+		rx -= 5
+	}
 	var _rail = instance_create_layer(rx, ry - 5, "Trains", O_Train);
-	
+	_rail.image_angle = 90 * rrot;
 	// show_debug_message("Train: "  + "\n")
 	// show_debug_message("Rot: " + string(rrot))
 }
