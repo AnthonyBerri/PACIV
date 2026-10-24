@@ -26,6 +26,7 @@
   "resources":[
     {"id":{"name":"O_Inventory","path":"objects/O_Inventory/O_Inventory.yy",},},
     {"id":{"name":"O_StraightRail","path":"objects/O_StraightRail/O_StraightRail.yy",},},
+    {"id":{"name":"O_Train","path":"objects/O_Train/O_Train.yy",},},
     {"id":{"name":"O_VirtualPointer","path":"objects/O_VirtualPointer/O_VirtualPointer.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"InventoryManager","path":"scripts/InventoryManager/InventoryManager.yy",},},
@@ -34,6 +35,7 @@
     {"id":{"name":"S_InventorySlot","path":"sprites/S_InventorySlot/S_InventorySlot.yy",},},
     {"id":{"name":"S_SelectedFlag","path":"sprites/S_SelectedFlag/S_SelectedFlag.yy",},},
     {"id":{"name":"S_StraightRail","path":"sprites/S_StraightRail/S_StraightRail.yy",},},
+    {"id":{"name":"S_Train","path":"sprites/S_Train/S_Train.yy",},},
     {"id":{"name":"S_TrainStation","path":"sprites/S_TrainStation/S_TrainStation.yy",},},
     {"id":{"name":"S_TurnRail","path":"sprites/S_TurnRail/S_TurnRail.yy",},},
     {"id":{"name":"Sprite1","path":"sprites/Sprite1/Sprite1.yy",},},

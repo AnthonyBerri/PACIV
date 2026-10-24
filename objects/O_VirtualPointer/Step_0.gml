@@ -2,6 +2,10 @@ if(keyboard_check_pressed(ord("Z"))){
 	PlaceRail(x, y, rot, 9);
 }
 
+if(keyboard_check_pressed(ord("R"))){
+	PlaceTrain(x, y, rot, 9);
+}
+
 if(keyboard_check_pressed(ord("X"))){
 	rot = (rot + 1) % 4;
 }

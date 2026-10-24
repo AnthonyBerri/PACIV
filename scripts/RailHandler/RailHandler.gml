@@ -19,3 +19,11 @@ function PlaceRail(rx, ry, rrot, rt) {
 	show_debug_message("Rot: " + string(rrot))
 }
 
+function PlaceTrain(rx, ry, rrot, rt) {
+	
+	var _rail = instance_create_layer(rx, ry - 5, "Trains", O_Train);
+	
+	// show_debug_message("Train: "  + "\n")
+	// show_debug_message("Rot: " + string(rrot))
+}
+
