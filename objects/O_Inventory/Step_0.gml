@@ -1,1 +1,1 @@
-InventoryManager()
+InventoryManager(self);
