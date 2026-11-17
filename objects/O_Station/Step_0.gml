@@ -16,12 +16,19 @@ if (station_role == "destination") {
 		}
 	} else {
 		overload_timer += _dt;
+		if (overload_timer >= overload_max) {
+			TriggerGameOver(id);
+		}
 	}
 } else if (station_role == "depot") {
 	// Despacha trens disponiveis para estacoes destino com demanda da mesma cor
 	for (var _t = 0; _t < array_length(trains); _t++) {
 		var _train = trains[_t];
 		if (!instance_exists(_train) || _train.state != "idle") continue;
+
+		// Garante que o trem parado esteja alinhado na entrada do deposito
+		_train.x = GridToWorldX(entry_gx) + (TILE_SIZE * 0.5);
+		_train.y = GridToWorldY(entry_gy) + (TILE_SIZE * 0.5);
 
 		var _best_dest = noone;
 		var _best_score = -1;

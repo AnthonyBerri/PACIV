@@ -1,3 +1,7 @@
+if (global.game_over || global.week_pending_reward) {
+	exit;
+}
+
 // Se o mouse se moveu, segue o tile sob o cursor do mouse
 if (mouse_x != last_mouse_x || mouse_y != last_mouse_y) {
 	last_mouse_x = mouse_x;
@@ -24,7 +28,8 @@ if (keyboard_check_pressed(ord("X")) || mouse_check_button_pressed(mb_middle)) {
 
 var _gx = WorldToGridX(x);
 var _gy = WorldToGridY(y);
-var _over_hud = (device_mouse_y_to_gui(0) >= 154);
+var _gui_y = device_mouse_y_to_gui(0);
+var _over_hud = (_gui_y >= 154 || _gui_y <= 15);
 
 // Construir com mouse esquerdo (ou Z)
 if ((mouse_check_button(mb_left) && !_over_hud) || keyboard_check_pressed(ord("Z"))) {

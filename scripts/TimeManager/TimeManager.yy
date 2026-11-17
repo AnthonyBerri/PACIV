@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"TimeManager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TimeManager",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

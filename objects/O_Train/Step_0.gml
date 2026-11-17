@@ -19,10 +19,16 @@ var _ty = GridToWorldY(_wp.gy) + (TILE_SIZE * 0.5);
 
 // Logica de cancela para cruzamentos (RAIL_TYPE.CROSS)
 if (_wp_cell.rail.rail_type == RAIL_TYPE.CROSS) {
+	var _cross = _wp_cell.rail;
+	// Libera reserva fantasma se o trem que reservou ficou idle ou foi destruido
+	if (_cross.reserved_by != noone && (!instance_exists(_cross.reserved_by) || _cross.reserved_by.state == "idle")) {
+		_cross.occupied_axis = "none";
+		_cross.reserved_by = noone;
+	}
+
 	var _dx = abs(_tx - x);
 	var _dy = abs(_ty - y);
 	var _axis = (_dx >= _dy) ? "ew" : "ns";
-	var _cross = _wp_cell.rail;
 
 	if (_cross.occupied_axis != "none" && _cross.occupied_axis != _axis && _cross.reserved_by != id) {
 		// Cancela fechada: espera o outro trem cruzar
@@ -34,7 +40,17 @@ if (_wp_cell.rail.rail_type == RAIL_TYPE.CROSS) {
 
 var _dist = point_distance(x, y, _tx, _ty);
 if (_dist > 0.25) {
-	image_angle = point_direction(x, y, _tx, _ty);
+	var _dx_move = _tx - x;
+	var _dy_move = _ty - y;
+	if (abs(_dx_move) >= abs(_dy_move)) {
+		image_angle = 0;
+		image_xscale = (_dx_move >= 0) ? 1 : -1;
+		image_yscale = 1;
+	} else {
+		image_angle = (_dy_move < 0) ? 90 : 270;
+		image_xscale = 1;
+		image_yscale = 1;
+	}
 }
 
 if (_dist <= _spd) {
@@ -52,18 +68,32 @@ if (_dist <= _spd) {
 
 	x = _tx;
 	y = _ty;
+
+	// Entrega em qualquer estacao destino da mesma cor ao passar pela entrada dela durante a ida
+	if (state == "to_dest") {
+		var _my_color = line_color;
+		var _wpx = _wp.gx;
+		var _wpy = _wp.gy;
+		with (O_Station) {
+			if (station_role == "destination" && line_color == _my_color && demand_count > 0) {
+				if (entry_gx == _wpx && entry_gy == _wpy) {
+					demand_count -= 1;
+					AddDeliveryScore(x, y);
+				}
+			}
+		}
+	}
+
 	route_index += 1;
 
 	if (route_index >= array_length(route)) {
-		if (state == "to_dest") {
-			// Concluiu entrega na estacao destino
-			if (instance_exists(target_station) && target_station.demand_count > 0) {
-				target_station.demand_count -= 1;
-			}
-			if (script_exists(asset_get_index("AddDeliveryScore")) && instance_exists(target_station)) {
-				AddDeliveryScore(target_station.x, target_station.y);
-			}
+		// Garante liberacao de cancela se o ultimo tile da rota era um cruzamento
+		if (_wp_cell.rail.rail_type == RAIL_TYPE.CROSS && _wp_cell.rail.reserved_by == id) {
+			_wp_cell.rail.occupied_axis = "none";
+			_wp_cell.rail.reserved_by = noone;
+		}
 
+		if (state == "to_dest") {
 			// Inverte a rota para retornar ao deposito
 			var _ret_route = [];
 			for (var _i = array_length(route) - 1; _i >= 0; _i--) {
@@ -78,6 +108,8 @@ if (_dist <= _spd) {
 			route = [];
 			route_index = 0;
 			image_angle = 0;
+			image_xscale = 1;
+			image_yscale = 1;
 		}
 	}
 } else {
@@ -85,4 +117,3 @@ if (_dist <= _spd) {
 	x += lengthdir_x(_spd, _dir);
 	y += lengthdir_y(_spd, _dir);
 }
-
